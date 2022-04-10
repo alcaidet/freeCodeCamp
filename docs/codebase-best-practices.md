@@ -6,6 +6,140 @@ In most cases, our [linter](how-to-setup-freecodecamp-locally.md#follow-these-st
 
 It is encouraged to use functional components over class-based components.
 
+## JavaScript Style Guide
+
+Please follow freeCodeCamp's JavaScript Style Guide. You can check out the [original guide](https://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121) posted to our [Discourse Forum](https://forum.freecodecamp.org/c/contributors/3).
+
+### Indent
+
+- Always use two spaces
+- No hard tabs, ever. No really, just don’t do it.
+
+### Curly Braces
+
+Always use curly braces when using the keywords if/else/else if. This prevents a lot of ambiguity and will prevent syntax errors in some edge cases.
+
+**Bad:**
+
+```javascript
+if (foo) bar();
+```
+
+**Good:**
+
+```javascript
+if (foo) {
+  bar();
+}
+```
+
+### Curly Braces Everywhere!
+
+Use a space after `function` keyword, except in anonymous functions
+
+**Good:**
+
+```javascript
+function foo() {}
+
+var foo = function () {
+  // ...
+};
+```
+
+**Bad:**
+
+```javascript
+function foo() {
+  // ...
+}
+
+var foo = function () {
+  // ...
+};
+```
+
+### Comments
+
+- No inline comments
+- Single space after `//`
+- Do not use multiline comment `/* */`, we are reserving these for use with jsDocs.
+
+### Keywords
+
+- Space immediately after if, else, while, etc
+- Opening curly brace should always be on the same line.
+
+**Good:**
+
+```javascript
+if (true) {
+  // do the thing
+}
+```
+
+**Bad:**
+
+```javascript
+if (true) {
+  // do the thing
+}
+```
+
+### Else
+
+Avoid else and “end early”. In JavaScript there is often a lot of indenting (usually when dealing with async code and named “callback hell”). Anything you can do to reduce the number of indents should be done. One thing is to avoid the [else](https://blog.timoxley.com/post/47041269194/avoid-else-return-early) keyword.
+
+This also has the side effect of making code cleaner and easier to read.
+
+**Bad:**
+
+```javascript
+someAsynFunc(function (err, data) {
+  if (err) {
+    callback(err);
+  } else {
+    // do stuff with data
+  }
+});
+```
+
+**Good:**
+
+```javascript
+someAsynFunc(function (err, data) {
+  if (err) {
+    return callback(err);
+  }
+  // do stuff with data
+  // saves one indent
+});
+```
+
+### Long Strings
+
+Long multiline strings should be in one of two forms:
+
+```javascript
+var longString =
+  'long strings should ' +
+  'be in this form, with the ' +
+  'operator ending the line.';
+var foo = 'bar';
+```
+
+```javascript
+var longString = [
+  'long strings with variables such as ',
+  foo,
+  ' should ',
+  'be in this form, an array of strings ',
+  'that are joined with the join array instance method'
+].join('');
+```
+
+…more to come
+
 ## Specific TypeScript
 
 ### Migrating a JavaScript File to TypeScript
@@ -16,7 +150,8 @@ Sometimes changing the file from `<filename>.js` to `<filename>.ts` (or `.tsx`) 
 
 The best bet at achieving this is to:
 
-1. Rename the file
+1. Rename the file.
+   - If the file uses the camel case naming convention (ex: `<fileName>.js`), please rename the file using the kebab case convention (ex: `<file-name>.ts`).
 2. Commit with the flag `--no-verify` to prevent Husky from complaining about the lint errors
 3. Refactor to TypeScript for migration, in a separate commit
 
