@@ -40,4 +40,20 @@ describe('Button', () => {
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });
+
+  it('should add text-lg class when Button size is large', () => {
+    render(<Button size='large'>Hello world</Button>);
+
+    expect(screen.getByRole('button', { name: /hello world/i })).toHaveClass(
+      'text-lg'
+    );
+  });
+
+  it('should add appropriate classes when Button size is small', () => {
+    render(<Button size='small'>Hello world</Button>);
+
+    expect(screen.getByRole('button', { name: /hello world/i })).toHaveClass(
+      'text-sm'
+    );
+  });
 });
